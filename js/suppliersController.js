@@ -22,10 +22,16 @@ $app.controller('suppliersController',function ($scope,$http,$routeParams,$locat
      */
 	$scope.loadAll = function(){
 		$scope.showLoader();
-		$http.get($scope.server("/"+resorces)).success(function(data){
+		$http.get(
+            $scope.server("/"+resorces)
+        ).success(function(data){
 			$scope.rows = data;
 			$scope.hideLoader();
-		});
+		}).error(function(data){
+            $scope.hideLoader();
+            alert("Erro ao consultar os itens\n" + data.error.text);
+            $location.path("/"+resorces);
+        });
 	};
     /**
      * Consulta por id
@@ -34,7 +40,9 @@ $app.controller('suppliersController',function ($scope,$http,$routeParams,$locat
         console.log($routeParams.id);
 		if (typeof $routeParams.id !== "undefined"){
 			$scope.showLoader();
-			$http.get($scope.server("/"+resorce+"/"+$routeParams.id)).success(function(data){
+			$http.get(
+                $scope.server("/"+resorce+"/"+$routeParams.id)
+            ).success(function(data){
 				$scope.row = data;
 				$scope.row.isUpdate = true;
 				$scope.hideLoader();
@@ -55,7 +63,10 @@ $app.controller('suppliersController',function ($scope,$http,$routeParams,$locat
      */
 	$scope.save = function(){
 		$scope.showLoader();
-		$http.post($scope.server("/"+resorce),$scope.row).success(function(data){
+		$http.post(
+            $scope.server("/"+resorce),
+            $scope.row
+        ).success(function(data){
 			alert("Salvo com sucesso");
 			$scope.row.isUpdate = true;
 			$scope.hideLoader();
@@ -71,7 +82,9 @@ $app.controller('suppliersController',function ($scope,$http,$routeParams,$locat
      */
 	$scope.del = function(){
 		if (confirm("Deseja excluir " + $scope.row.supplierID + "?")){
-			$http.delete($scope.server("/"+resorce+"/"+$routeParams.id)).success(function(s){
+			$http.delete(
+                $scope.server("/"+resorce+"/"+$routeParams.id)
+            ).success(function(s){
 				$scope.hideLoader();
 				alert("Excluído com sucesso");
 				$location.path("/"+resorces);

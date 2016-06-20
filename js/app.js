@@ -26,7 +26,11 @@ $app.config(['$routeProvider','$httpProvider',function($routeProvider,$httpProvi
 	when('/supplier/new',{templateUrl:'view/suppliers/update.html',controller:'suppliersController'}).
 	when('/supplier/:id',{templateUrl:'view/suppliers/update.html',controller:'suppliersController'}).
 	when('/shippers',{templateUrl:'view/shippers/main.html',controller:'shippersController'}).
+	when('/shipper/new',{templateUrl:'view/shippers/update.html',controller:'shippersController'}).
+	when('/shipper/:id',{templateUrl:'view/shippers/update.html',controller:'shippersController'}).
 	when('/orders',{templateUrl:'view/orders/main.html',controller:'ordersController'}).
+	when('/order/new',{templateUrl:'view/orders/update.html',controller:'ordersController'}).
+	when('/order/:id',{templateUrl:'view/orders/update.html',controller:'ordersController'}).
 	otherwise({redirectTo:'/'});
 
 	//configura o RESPONSE interceptor, usado para exibir o ícone de acesso ao servidor

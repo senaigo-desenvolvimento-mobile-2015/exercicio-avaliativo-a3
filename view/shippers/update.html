@@ -1,0 +1,33 @@
+<h2>{{page_title}}</h2>
+<div ng-init="loadRow()">
+    <form name="form" class="form-horizontal" ng-show="row!=null">
+        <div class="control-group">
+            <label class="control-label">ID:</label>
+            <div class="controls">
+                <input name="shipperID" type="text" ng-model="row.shipperID" class="input-small" required ng-disabled="row.isUpdate" />
+                <span class="help-inline text-error" ng-show="form.shipperID.$dirty && form.shipperID.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Empresa:</label>
+            <div class="controls">
+                <input name="companyName" required type="text" ng-model="row.companyName" class="input-xxlarge" />
+                <span class="help-inline text-error" ng-show="form.companyName.$dirty && form.companyName.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Telefone:</label>
+            <div class="controls">
+                <input name="phone" required type="text" ng-model="row.phone" class="input-xxlarge" />
+                <span class="help-inline text-error" ng-show="form.phone.$dirty && form.phone.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-actions">
+    <button type="submit" class="btn btn-primary" ng-click="save()" ng-Disabled="form.$invalid">Salvar</button>
+    <a href="#/shippers" class="btn">Voltar</a>
+</div>
+</form>
+<button class="btn btn-danger pull-right" ng-click="del()">Apagar</button>
+</div>

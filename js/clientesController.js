@@ -18,16 +18,24 @@ $app.controller('clientesController',function ($scope,$http,$routeParams,$locati
 
 	$scope.loadAll = function(){
 		$scope.showLoader();
-		$http.get($scope.server("/customers")).success(function(data){
+		$http.get(
+            $scope.server("/customers")
+        ).success(function(data){
 			$scope.rows = data;
 			$scope.hideLoader();
-		});
+		}).error(function(data){
+            $scope.hideLoader();
+            alert("Erro ao consultar os itens\n" + data.error.text);
+            $location.path("/"+resorces);
+        });
 	};
 
 	$scope.loadRow = function(){
 		if ($routeParams.id!==null){
 			$scope.showLoader();
-			$http.get($scope.server("/customer/"+$routeParams.id)).success(function(data){
+			$http.get(
+                $scope.server("/customer/"+$routeParams.id)
+            ).success(function(data){
 				$scope.row = data;
 				$scope.row.isUpdate = true;
 				$scope.hideLoader();
@@ -42,7 +50,10 @@ $app.controller('clientesController',function ($scope,$http,$routeParams,$locati
 
 	$scope.save = function(){
 		$scope.showLoader();
-		$http.post($scope.server("/customer"),$scope.row).success(function(data){
+		$http.post(
+            $scope.server("/customer"),
+            $scope.row
+        ).success(function(data){
 			alert("Salvo com sucesso");
 			$scope.row.isUpdate = true;
 			$scope.hideLoader();
@@ -52,12 +63,13 @@ $app.controller('clientesController',function ($scope,$http,$routeParams,$locati
 
 	$scope.del = function(){
 		if (confirm("Deseja excluir " + $scope.row.customerID + "?")){
-			$http.delete($scope.server("/customer/"+$routeParams.id)).success(function(s){
+			$http.delete(
+                $scope.server("/customer/"+$routeParams.id)
+            ).success(function(s){
 				$scope.hideLoader();
 				alert("Excluído com sucesso");
 				$location.path("/clientes");
 			});
 		}
 	};
-
 });

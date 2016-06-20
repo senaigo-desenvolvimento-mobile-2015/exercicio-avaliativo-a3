@@ -11,9 +11,15 @@ $app.controller('funcionariosController',function ($scope,$http,$routeParams,$lo
 
 	$scope.loadAll = function(){
 		$scope.showLoader();
-		$http.get($scope.server("/employees")).success(function(data){
+		$http.get(
+            $scope.server("/employees")
+        ).success(function(data){
 			$scope.rows = data;
-		});
+		}).error(function(data){
+            $scope.hideLoader();
+            alert("Erro ao consultar os itens\n" + data.error.text);
+            $location.path("/"+resorces);
+        });
 	};
 
 	$scope.loadRow = function(id){

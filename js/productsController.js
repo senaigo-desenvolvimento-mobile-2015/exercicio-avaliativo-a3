@@ -22,16 +22,24 @@ $app.controller('productsController',function ($scope,$http,$routeParams,$locati
      */
 	$scope.loadAll = function(){
 		$scope.showLoader();
-		$http.get($scope.server("/"+resorces)).success(function(data){
+		$http.get(
+            $scope.server("/"+resorces)
+        ).success(function(data){
 			$scope.rows = data;
 			$scope.hideLoader();
-		});
+		}).error(function(data){
+            $scope.hideLoader();
+            alert("Erro ao consultar os itens\n" + data.error.text);
+            $location.path("/"+resorces);
+        });
 	};
     /**
      * Consulta fornecedores para relacionamento
      */
     function loadSuppliers(){
-        $http.get($scope.server("/suppliers")).success(function(data){
+        $http.get(
+            $scope.server("/suppliers")
+        ).success(function(data){
 			$scope.suppliers = {
                 availableOptions: data
             };
@@ -41,7 +49,9 @@ $app.controller('productsController',function ($scope,$http,$routeParams,$locati
      * Consulta fornecedores para relacionamento
      */
     function loadCategories(){
-        $http.get($scope.server("/categories")).success(function(data){
+        $http.get(
+            $scope.server("/categories")
+        ).success(function(data){
 			$scope.categories = {
                 availableOptions: data
             };

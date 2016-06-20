@@ -23,10 +23,16 @@ $app.controller('categoriesController',function ($scope,$http,$routeParams,$loca
      */
 	$scope.loadAll = function(){
 		$scope.showLoader();
-		$http.get($scope.server("/"+resorces)).success(function(data){
+		$http.get(
+            $scope.server("/"+resorces)
+        ).success(function(data){
 			$scope.rows = data;
 			$scope.hideLoader();
-		});
+		}).error(function(data){
+            $scope.hideLoader();
+            alert("Erro ao consultar os itens\n" + data.error.text);
+            $location.path("/"+resorces);
+        });
 	};
     /**
      * Consulta por id
@@ -34,7 +40,9 @@ $app.controller('categoriesController',function ($scope,$http,$routeParams,$loca
 	$scope.loadRow = function(){
 		if ($routeParams.id!==null){
 			$scope.showLoader();
-			$http.get($scope.server("/"+resorce+"/"+$routeParams.id)).success(function(data){
+			$http.get(
+                $scope.server("/"+resorce+"/"+$routeParams.id)
+            ).success(function(data){
 				$scope.row = data;
 				$scope.row.isUpdate = true;
 				$scope.hideLoader();
@@ -56,7 +64,10 @@ $app.controller('categoriesController',function ($scope,$http,$routeParams,$loca
 	$scope.save = function(){
 		$scope.showLoader();
         $scope.row.picture = $scope.imageStrings[0];
-		$http.post($scope.server("/"+resorce),$scope.row).success(function(data){
+		$http.post(
+            $scope.server("/"+resorce),
+            $scope.row
+        ).success(function(data){
 			alert("Salvo com sucesso");
 			$scope.row.isUpdate = true;
 			$scope.hideLoader();
@@ -72,7 +83,9 @@ $app.controller('categoriesController',function ($scope,$http,$routeParams,$loca
      */
 	$scope.del = function(){
 		if (confirm("Deseja excluir " + $scope.row.categoryID + "?")){
-			$http.delete($scope.server("/"+resorce+"/"+$routeParams.id)).success(function(s){
+			$http.delete(
+                $scope.server("/"+resorce+"/"+$routeParams.id)
+            ).success(function(s){
 				$scope.hideLoader();
 				alert("Excluído com sucesso");
 				$location.path("/"+resorces);

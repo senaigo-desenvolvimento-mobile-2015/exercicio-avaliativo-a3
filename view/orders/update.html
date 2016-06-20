@@ -1,0 +1,139 @@
+<h2>{{page_title}}</h2>
+<div ng-init="loadRow()">
+    <form name="form" class="form-horizontal" ng-show="row!=null">
+        <input type="hidden" name="row.isUpdate" value="true">
+        <div class="control-group">
+            <label class="control-label">ID:</label>
+            <div class="controls">
+                <input name="orderID" type="text" ng-model="row.orderID" class="input-small" required ng-disabled="row.isUpdate" />
+                <span class="help-inline text-error" ng-show="form.orderID.$dirty && form.orderID.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Cliente:</label>
+            <div class="controls">
+                <select class="input-xxlarge" name="customerID" ng-model="row.customer.customerID" required >
+                    <option ng-repeat="customer in customers.values" value="{{customer.customerID}}">{{customer.contactName}}</option>
+                </select>
+                <span class="help-inline text-error" ng-show="form.customerID.$dirty && form.customerID.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Funcion&aacute;rio:</label>
+            <div class="controls">
+                <select class="input-xxlarge" name="employeeID" ng-model="row.employee.employeeID" required >
+                    <option ng-selected="row.employee.employeeID" ng-repeat="employee in employees.availableOptions" value="{{employee.employeeID}}">{{employee.firstName}} {{employee.lastName}}</option>
+                </select>
+                <span class="help-inline text-error" ng-show="form.employeeID.$dirty && form.employeeID.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Data do pedido:</label>
+            <div class="controls">
+                <input name="orderDate" ng-model="row.orderDate" type="text" ng-pattern="/\d{1,2}/\d{1,2}/\d{4}/" />
+                <span class="help-inline text-error" ng-show="form.orderDate.$dirty && form.orderDate.$invalid">
+                    <span>Data inv&aacute;lida</span>
+                </span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Data de requisi&ccedil;&atilde;o:</label>
+            <div class="controls">
+                <input name="requiredDate" ng-model="row.requiredDate" type="text" ng-pattern="/\d{1,2}/\d{1,2}/\d{4}/" />
+                <span class="help-inline text-error" ng-show="form.requiredDate.$dirty && form.requiredDate.$invalid">
+                    <span>Data inv&aacute;lida</span>
+                </span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Data de envio:</label>
+            <div class="controls">
+                <input name="shippedDate" ng-model="row.shippedDate" type="text" ng-pattern="/\d{1,2}/\d{1,2}/\d{4}/" />
+                <span class="help-inline text-error" ng-show="form.shippedDate.$dirty && form.shippedDate.$invalid">
+                    <span>Data inv&aacute;lida</span>
+                </span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Enviado por:</label>
+            <div class="controls">
+                <select class="input-xxlarge" name="shipper" ng-model="row.shipper.shipperID" required >
+                    <option ng-selected="row.shipper.shipperID" ng-repeat="shipper in shippers.availableOptions" value="{{shipper.shipperID}}">{{shipper.companyName}}</option>
+                </select>
+                <span class="help-inline text-error" ng-show="form.shipper.$dirty && form.shipper.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Valor do frete:</label>
+            <div class="controls">
+                <input name="freight" type="text" ng-model="row.freight" class="input-xxlarge" required />
+                <span class="help-inline text-error" ng-show="form.freight.$dirty && form.freight.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Nome da entrega:</label>
+            <div class="controls">
+                <input name="shipName" type="text" ng-model="row.shipName" class="input-xxlarge" required />
+                <span class="help-inline text-error" ng-show="form.shipName.$dirty && form.shipName.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Endere&ccedil;o de entrega:</label>
+            <div class="controls">
+                <input name="shipAddress" type="text" ng-model="row.shipAddress" class="input-xxlarge" required />
+                <span class="help-inline text-error" ng-show="form.shipAddress.$dirty && form.shipAddress.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Cidade de entrega:</label>
+            <div class="controls">
+                <input name="shipCity" type="text" ng-model="row.shipCity" class="input-xxlarge" required />
+                <span class="help-inline text-error" ng-show="form.shipCity.$dirty && form.shipCity.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Regi&atilde;o de entrega:</label>
+            <div class="controls">
+                <input name="shipRegion" type="text" ng-model="row.shipRegion" class="input-xxlarge"  />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">C&oacute;digo postal de entrega:</label>
+            <div class="controls">
+                <input name="shipPostalCode" type="text" ng-model="row.shipPostalCode" class="input-xxlarge" required />
+                <span class="help-inline text-error" ng-show="form.shipPostalCode.$dirty && form.shipPostalCode.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Pa&iacute;s de entrega:</label>
+            <div class="controls">
+                <input name="shipCountry" type="text" ng-model="row.shipCountry" class="input-xxlarge" required />
+                <span class="help-inline text-error" ng-show="form.shipCountry.$dirty && form.shipCountry.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="row">
+            <p>Itens pedido:</p>
+                <div class="col-md-4">
+                    <select class="input-xlarge" name="productID" ng-model="row.product.productID" required >
+                        <option ng-repeat="product in products.values" value="{{product.productID}}">{{product.productName}}</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    Preco unitario
+                </div>
+                <div class="col-md-4">
+                    quantidade
+                </div>
+                <div class="col-md-4">
+                    desconto
+                </div>
+        </div>
+    </form>
+</div>
+<div class="form-actions">
+    <button type="submit" class="btn btn-primary" ng-click="save()" ng-Disabled="form.$invalid">Salvar</button>
+    <a href="#/orders" class="btn">Voltar</a>
+</div>
+</form>
+<button class="btn btn-danger pull-right" ng-click="del()">Apagar</button>
+</div>
