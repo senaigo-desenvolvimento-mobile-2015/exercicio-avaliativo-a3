@@ -1,43 +1,47 @@
 <h2>Funcionários</h2>
-<button class="btn btn-primary pull-right" ng-click="new()">Novo</button>
 <div ng-init="loadAll()">
-	<div class="span3">
-		<ul class="nav nav-tabs nav-stacked">
-			<li ng-repeat="row in rows"><a ng-click="loadRow(row.employeeID)">{{row.lastName}}, {{row.firstName}}</a></li>
-		</ul>
-	</div>
-	<div class="span7" ng-show="row!=null">
-		<h3>{{row.lastName}}, {{row.firstName}}</h3>
-		<hr/>
-		<form ng-submit="save()" class="form-horizontal" ng-show="row!=null">
-			<div class="control-group">
-				<label class="control-label">Nome:</label>
-				<div class="controls">
-					<input type="text" ng-model="row.firstName" class="input-xxlarge" />
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Sobrenome:</label>
-				<div class="controls">
-					<input type="text" ng-model="row.lastName" class="input-xxlarge" />
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Telefone:</label>
-				<div class="controls">
-					<input type="text" ng-model="row.homePhone"/>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Data Nascimento:</label>
-				<div class="controls">
-					<input type="text" ng-model="row.birthDate"/>
-				</div>
-			</div>
-
-			<div class="form-actions">
-				<button type="submit" class="btn btn-primary">Salvar</button>
-			</div>
-		</form>
-	</div>	
+  <div class="row">
+    <button class="btn btn-primary pull-right" ng-click="new()">Novo</button>
+    <div class="col-xs-6 col-sm-4">
+      <ul class="nav nav-tabs nav-stacked">
+        <li ng-repeat="row in rows"><a ng-click="loadRow(row.employeeID)">{{row.lastName}}, {{row.firstName}}</a></li>
+      </ul>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-8" ng-show="row!=null">
+      <h3>{{row.lastName}}, {{row.firstName}}</h3>
+      <hr/>
+      <form ng-submit="save()" ng-show="row!=null">
+        <div class="row">
+          <div class="col-md-10">
+          <label class="control-label">Nome</label>
+            <input type="text" ng-model="row.firstName" class="form-control" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-10">
+          <label class="control-label">Sobrenome</label>
+            <input type="text" ng-model="row.lastName" class="form-control" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-10">
+          <label class="control-label">Telefone</label>
+            <input type="text" ng-model="row.homePhone" class="form-control" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-10">
+          <label class="control-label">Data Nascimento</label>
+            <input type="text" ng-model="row.birthDate" class="form-control"/>
+          </div>
+        </div><br>
+        <div class="row">
+          <div class="col-md-10">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
+<br>

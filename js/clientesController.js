@@ -2,74 +2,74 @@
 
 //function clientesController($scope,$http,$routeParams,$location)
 $app.controller('clientesController',function ($scope,$http,$routeParams,$location) {
-	//lista de clientes
-	$scope.rows = null;
+  //lista de clientes
+  $scope.rows = null;
 
-	//um cliente
-	$scope.row = null;
+  //um cliente
+  $scope.row = null;
 
-	//Pagination
-	$scope.currentPage = 0;
-	$scope.pageSize = 15;
+  //Pagination
+  $scope.currentPage = 0;
+  $scope.pageSize = 15;
 
-	$scope.numberOfPages =function(){
-		return Math.ceil($scope.rows.length/$scope.pageSize);
-	};
+  $scope.numberOfPages =function(){
+    return Math.ceil($scope.rows.length/$scope.pageSize);
+  };
 
-	$scope.loadAll = function(){
-		$scope.showLoader();
-		$http.get(
-            $scope.server("/customers")
-        ).success(function(data){
-			$scope.rows = data;
-			$scope.hideLoader();
-		}).error(function(data){
-            $scope.hideLoader();
-            alert("Erro ao consultar os itens\n" + data.error.text);
-            $location.path("/"+resorces);
-        });
-	};
+  $scope.loadAll = function(){
+    $scope.showLoader();
+    $http.get(
+      $scope.server("/customers")
+    ).success(function(data){
+      $scope.rows = data;
+      $scope.hideLoader();
+    }).error(function(data){
+      $scope.hideLoader();
+      alert("Erro ao consultar os itens\n" + data.error.text);
+      $location.path("/"+resorces);
+    });
+  };
 
-	$scope.loadRow = function(){
-		if ($routeParams.id!==null){
-			$scope.showLoader();
-			$http.get(
-                $scope.server("/customer/"+$routeParams.id)
-            ).success(function(data){
-				$scope.row = data;
-				$scope.row.isUpdate = true;
-				$scope.hideLoader();
-			});
-		}else{
-			$scope.row = {};
-			$scope.row.customerID = null;
-			$scope.row.isUpdate = false;
-			$scope.hideLoader();
-		}
-	};
+  $scope.loadRow = function(){
+    if ($routeParams.id!==null){
+      $scope.showLoader();
+      $http.get(
+        $scope.server("/customer/"+$routeParams.id)
+      ).success(function(data){
+        $scope.row = data;
+        $scope.row.isUpdate = true;
+        $scope.hideLoader();
+      });
+    }else{
+      $scope.row = {};
+      $scope.row.customerID = null;
+      $scope.row.isUpdate = false;
+      $scope.hideLoader();
+    }
+  };
 
-	$scope.save = function(){
-		$scope.showLoader();
-		$http.post(
-            $scope.server("/customer"),
-            $scope.row
-        ).success(function(data){
-			alert("Salvo com sucesso");
-			$scope.row.isUpdate = true;
-			$scope.hideLoader();
-			$location.path("/clientes");
-		});
-	};
+  $scope.save = function(){
+    $scope.showLoader();
+    $http.post(
+      $scope.server("/customer"),
+      $scope.row
+    ).success(function(data){
+      alert("Salvo com sucesso");
+      $scope.row.isUpdate = true;
+      $scope.hideLoader();
+      $location.path("/clientes");
+    });
+  };
 
-	$scope.del = function(){
-		if (confirm("Deseja excluir " + $scope.row.customerID + "?")){
-			$http.delete(
-                $scope.server("/customer/"+$routeParams.id)
-            ).success(function(s){
-				$scope.hideLoader();
-				alert("Excluído com sucesso");
-				$location.path("/clientes");
-			});
-		}
-	};
+  $scope.del = function(){
+    if (confirm("Deseja excluir " + $scope.row.customerID + "?")){
+      $http.delete(
+        $scope.server("/customer/"+$routeParams.id)
+      ).success(function(s){
+        $scope.hideLoader();
+        alert("Excluído com sucesso");
+        $location.path("/clientes");
+      });
+    }
+  };
 });
