@@ -1,0 +1,96 @@
+<h2>{{page_title}}</h2>
+<div ng-init="loadRow()">
+    <form name="form" class="form-horizontal" ng-show="row!=null">
+        <div class="control-group">
+            <label class="control-label">ID:</label>
+            <div class="controls">
+                <input name="supplierID" type="text" ng-model="row.supplierID" class="input-small" required ng-disabled="row.isUpdate" />
+                <span class="help-inline text-error" ng-show="form.supplierID.$dirty && form.supplierID.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Empresa:</label>
+            <div class="controls">
+                <input name="companyName" type="text" ng-model="row.companyName" class="input-xxlarge" required />
+                <span class="help-inline text-error" ng-show="form.companyName.$dirty && form.companyName.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Nome do contato:</label>
+            <div class="controls">
+                <input name="contactName" type="text" ng-model="row.contactName" class="input-xxlarge" required />
+                <span class="help-inline text-error" ng-show="form.contactName.$dirty && form.contactName.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">T&iacute;tulo do contato:</label>
+            <div class="controls">
+                <input name="contactTitle" type="text" ng-model="row.contactTitle" class="input-xxlarge" required />
+                <span class="help-inline text-error" ng-show="form.contactTitle.$dirty && form.contactTitle.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Endere&ccedil;o:</label>
+            <div class="controls">
+                <input name="address" type="text" ng-model="row.address" class="input-xxlarge" required />
+                <span class="help-inline text-error" ng-show="form.address.$dirty && form.address.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Cidade:</label>
+            <div class="controls">
+                <input name="city" type="text" ng-model="row.city" class="input-xxlarge" required />
+                <span class="help-inline text-error" ng-show="form.city.$dirty && form.city.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Regi&atilde;o:</label>
+            <div class="controls">
+                <input name="region" type="text" ng-model="row.region" class="input-xxlarge" required />
+                <span class="help-inline text-error" ng-show="form.region.$dirty && form.region.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">C&oacute;digo postal:</label>
+            <div class="controls">
+                <input name="postalCode" type="text" ng-model="row.postalCode" class="input-xxlarge" required />
+                <span class="help-inline text-error" ng-show="form.postalCode.$dirty && form.postalCode.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Pa&iacute;s:</label>
+            <div class="controls">
+                <input name="country" type="text" ng-model="row.country" class="input-xxlarge" required />
+                <span class="help-inline text-error" ng-show="form.country.$dirty && form.country.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Telefone:</label>
+            <div class="controls">
+                <input name="phone" type="text" ng-model="row.phone" class="input-xxlarge" required />
+                <span class="help-inline text-error" ng-show="form.phone.$dirty && form.phone.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Fax:</label>
+            <div class="controls">
+                <input name="fax" type="text" ng-model="row.fax" class="input-xxlarge" required />
+                <span class="help-inline text-error" ng-show="form.fax.$dirty && form.fax.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Site:</label>
+            <div class="controls">
+                <input name="homePage" type="text" ng-model="row.homePage" class="input-xxlarge" required ng-pattern="/https?://.+/" />
+                <span class="help-inline text-error" ng-show="form.homePage.$dirty && form.homePage.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-actions">
+    <button type="submit" class="btn btn-primary" ng-click="save()" ng-Disabled="form.$invalid">Salvar</button>
+    <a href="#/suppliers" class="btn">Voltar</a>
+</div>
+</form>
+<button class="btn btn-danger pull-right" ng-click="del()">Apagar</button>
+</div>

@@ -1,0 +1,43 @@
+<h2>Funcionários</h2>
+<button class="btn btn-primary pull-right" ng-click="new()">Novo</button>
+<div ng-init="loadAll()">
+	<div class="span3">
+		<ul class="nav nav-tabs nav-stacked">
+			<li ng-repeat="row in rows"><a ng-click="loadRow(row.employeeID)">{{row.lastName}}, {{row.firstName}}</a></li>
+		</ul>
+	</div>
+	<div class="span7" ng-show="row!=null">
+		<h3>{{row.lastName}}, {{row.firstName}}</h3>
+		<hr/>
+		<form ng-submit="save()" class="form-horizontal" ng-show="row!=null">
+			<div class="control-group">
+				<label class="control-label">Nome:</label>
+				<div class="controls">
+					<input type="text" ng-model="row.firstName" class="input-xxlarge" />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Sobrenome:</label>
+				<div class="controls">
+					<input type="text" ng-model="row.lastName" class="input-xxlarge" />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Telefone:</label>
+				<div class="controls">
+					<input type="text" ng-model="row.homePhone"/>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Data Nascimento:</label>
+				<div class="controls">
+					<input type="text" ng-model="row.birthDate"/>
+				</div>
+			</div>
+
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary">Salvar</button>
+			</div>
+		</form>
+	</div>	
+</div>

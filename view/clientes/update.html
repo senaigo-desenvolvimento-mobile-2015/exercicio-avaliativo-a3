@@ -1,0 +1,60 @@
+<h2>Cliente</h2>
+<div ng-init="loadRow()">
+    <form name="form" class="form-horizontal" ng-show="row!=null">
+        <div class="control-group">
+            <label class="control-label">ID:</label>
+            <div class="controls">
+                <input name="customerID" type="text" ng-model="row.customerID" class="input-small" required ng-disabled="row.isUpdate" />
+                <span class="help-inline text-error" ng-show="form.customerID.$dirty && form.customerID.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Nome:</label>
+            <div class="controls">
+                <input name="contactName" required type="text" ng-model="row.contactName" class="input-xxlarge" />
+                <span class="help-inline text-error" ng-show="form.contactName.$dirty && form.contactName.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Telefone:</label>
+            <div class="controls">
+                <input type="text" ng-model="row.phone" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Email:</label>
+            <div class="controls">
+                <input name="email" type="email" ng-model="row.email" required/>
+                <span class="help-inline text-error" ng-show="form.email.$dirty && form.email.$invalid">
+                        <span ng-show="form.email.$error.required">Campo obrigat&oacute;rio</span>
+                <span ng-show="form.email.$error.email">Email inv&aacute;lido</span>
+                </span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Url:</label>
+            <div class="controls">
+                <input name="url" type="url" ng-model="row.url" ng-pattern="/https?://.+/" />
+                <span class="help-inline text-error" ng-show="form.url.$dirty && form.url.$invalid">
+                        <span>Url inv&aacute;lida</span>
+                </span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Data simples:</label>
+            <div class="controls">
+                <input name="dataSimples" ng-model="row.dataSimples" type="text" ng-pattern="/\d{1,2}/\d{1,2}/\d{4}/" />
+                <span class="help-inline text-error" ng-show="form.dataSimples.$dirty && form.dataSimples.$invalid">
+                        <span>Data inv&aacute;lida</span>
+                </span>
+            </div>
+        </div>
+</div>
+</div>
+<div class="form-actions">
+    <button type="submit" class="btn btn-primary" ng-click="save()" ng-Disabled="form.$invalid">Salvar</button>
+    <a href="#/clientes" class="btn">Voltar</a>
+</div>
+</form>
+<button class="btn btn-danger pull-right" ng-click="del()">Apagar</button>
+</div>

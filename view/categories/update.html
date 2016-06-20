@@ -1,0 +1,44 @@
+<h2>{{page_title}}</h2>
+<div ng-init="loadRow()">
+    <form name="form" class="form-horizontal" ng-show="row!=null">
+        <div class="control-group">
+            <label class="control-label">ID:</label>
+            <div class="controls">
+                <input name="categoryID" type="text" ng-model="row.categoryID" class="input-small" required ng-disabled="row.isUpdate" />
+                <span class="help-inline text-error" ng-show="form.categoryID.$dirty && form.categoryID.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Nome:</label>
+            <div class="controls">
+                <input name="categoryName" required type="text" ng-model="row.categoryName" class="input-xxlarge" />
+                <span class="help-inline text-error" ng-show="form.categoryName.$dirty && form.categoryName.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Descri&ccedil;&atilde;o:</label>
+            <div class="controls">
+                <textarea name="description" required ng-model="row.description" class="input-xxlarge" rows="8" cols="40"></textarea>
+                <span class="help-inline text-error" ng-show="form.description.$dirty && form.description.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Foto:</label>
+            <div flow-init flow-name="uploader.flow" flow-files-added="processFiles($files)">
+                <button flow-btn type="file">Enviar foto</button>
+                <div ng-repeat="image in uploader.flow.files track by $index">
+                    <img class="preview" flow-img="image" ng-show="false"/>
+                    <span class="text">Preview</span> <img class="preview" ng-src="{{imageStrings[$index]}}"/>
+                </div>
+            </div>
+            <img ng-show="updatePicture" src="http://urbano.eti.br/angular-rest/category/{{row.categoryID}}/png" alt="" class="img-thumbnail">
+        </div>
+    </div>
+</div>
+<div class="form-actions">
+    <button type="submit" class="btn btn-primary" ng-click="save()" ng-Disabled="form.$invalid">Salvar</button>
+    <a href="#/categories" class="btn">Voltar</a>
+</div>
+</form>
+<button class="btn btn-danger pull-right" ng-click="del()">Apagar</button>
+</div>

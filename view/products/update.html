@@ -1,0 +1,88 @@
+<h2>{{page_title}}</h2>
+<div ng-init="loadRow()">
+    <form name="form" class="form-horizontal" ng-show="row!=null">
+        <input type="hidden" name="row.isUpdate" value="true">
+        <div class="control-group">
+            <label class="control-label">ID:</label>
+            <div class="controls">
+                <input name="productID" type="text" ng-model="row.productID" class="input-small" required ng-disabled="row.isUpdate" />
+                <span class="help-inline text-error" ng-show="form.categoryID.$dirty && form.productID.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Nome:</label>
+            <div class="controls">
+                <input name="productName" type="text" ng-model="row.productName" class="input-xxlarge" required  />
+                <span class="help-inline text-error" ng-show="form.productName.$dirty && form.productName.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Fornecedor:</label>
+            <div class="controls">
+                <select class="input-xxlarge" name="supplierID" ng-model="row.supplierID" required >
+                    <option ng-repeat="supplier in suppliers.availableOptions" value="{{supplier.supplierID}}">{{supplier.companyName}}</option>
+                </select>
+                <span class="help-inline text-error" ng-show="form.supplierID.$dirty && form.supplierID.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Categoria:</label>
+            <div class="controls">
+                <select class="input-xxlarge" name="categoryID" ng-model="row.categoryID" required >
+                    <option ng-repeat="category in categories.availableOptions" value="{{category.categoryID}}">{{category.categoryName}}</option>
+                </select>
+                <span class="help-inline text-error" ng-show="form.supplierID.$dirty && form.supplierID.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Quantidade por unidade:</label>
+            <div class="controls">
+                <input name="quantityPerUnit" type="text" ng-model="row.quantityPerUnit" class="input-xxlarge" required />
+                <span class="help-inline text-error" ng-show="form.quantityPerUnit.$dirty && form.quantityPerUnit.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Valor unit&aacute;rio:</label>
+            <div class="controls">
+                <input name="unitPrice" type="text" ng-model="row.unitPrice" class="input-xxlarge" required />
+                <span class="help-inline text-error" ng-show="form.unitPrice.$dirty && form.unitPrice.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Quantidade em estoque:</label>
+            <div class="controls">
+                <input name="unitsInStock" type="text" ng-model="row.unitsInStock" class="input-xxlarge" required />
+                <span class="help-inline text-error" ng-show="form.unitsInStock.$dirty && form.unitsInStock.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Quantidade em pedidos:</label>
+            <div class="controls">
+                <input name="unitsOnOrder" type="text" ng-model="row.unitsOnOrder" class="input-xxlarge" required />
+                <span class="help-inline text-error" ng-show="form.unitsOnOrder.$dirty && form.unitsOnOrder.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Repedido:</label>
+            <div class="controls">
+                <input name="reOrderLevel" type="text" ng-model="row.reOrderLevel" class="input-xxlarge" required />
+                <span class="help-inline text-error" ng-show="form.reOrderLevel.$dirty && form.reOrderLevel.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Discontinuado:</label>
+            <div class="controls">
+                <input type="radio" name="discontinued" ng-model="row.discontinued" value="0">Sim
+                <input type="radio" name="discontinued" ng-model="row.discontinued" value="1" checked="checked" >N&atilde;o
+                <span class="help-inline text-error" ng-show="form.discontinued.$dirty && form.discontinued.$invalid">Campo obrigat&oacute;rio</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-actions">
+    <button type="submit" class="btn btn-primary" ng-click="save()" ng-Disabled="form.$invalid">Salvar</button>
+    <a href="#/products" class="btn">Voltar</a>
+</div>
+</form>
+<button class="btn btn-danger pull-right" ng-click="del()">Apagar</button>
+</div>

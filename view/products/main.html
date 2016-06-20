@@ -1,0 +1,38 @@
+<h2>{{page_title}}</h2>
+<div ng-init="loadAll()">
+	<div>
+		<a href="#/product/new" class="pull-right ">Novo</a>
+	</div>
+	<table id="tableData" class="table table-bordered table-hover table-striped">
+		<thead>
+			<tr>
+				<th width="10%">Id</th>
+				<th>Nome</th>
+                <th>Fornecedor</th>
+                <th>Categoria</th>
+                <th>Quantidade por unidade</th>
+				<th>Valor unit&aacute;rio</th>
+                <th>Quantidade em estoque</th>
+                <th>Quantidade em pedidos</th>
+                <th>Repedidos</th>
+                <th>Discontinuado</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="row in rows | startFrom: currentPage*pageSize| limitTo: pageSize">
+				<td>{{row.productID}}</td>
+				<td><a href='#/product/{{row.productID}}'>{{row.productName}}</a></td>
+				<td>{{row.supplierID}}</td>
+				<td>{{row.categoryID}}</td>
+				<td>{{row.quantityPerUnit}}</td>
+				<td>{{row.unitPrice | currency : "R$"}}</td>
+                <td>{{row.unitsInStock}}</td>
+                <td>{{row.unitsOnOrder}}</td>
+                <td>{{row.reOrderLevel}}</td>
+                <td>{{row.discontinued}}</td>
+			</tr>
+		</tbody>
+	</table>
+	<button class="btn btn-primary" ng-click="currentPage=currentPage-1" ng-disabled="currentPage == 0" >&larr; Voltar</button>
+	<button class="btn btn-primary pull-right" ng-click="currentPage=currentPage+1" ng-disabled="currentPage >= rows.length/pageSize - 1">Avançar &rarr;</button>
+</div>
